@@ -11,12 +11,12 @@ public class Ruin {
         System.out.print("What is the total numbers of days that you want to simulate? ");
         int totalSimulations = in.nextInt();
         int days = 0;
-        int amounMoney = startAmount;
+        int amountMoney = startAmount;
         int success = 0;
         int losses = 0;
         double expectedRuinRates;
-        double alphaStartAmount = (1.0-startAmount)/startAmount;
-        double alphaWinLimit = (1.0-winLimit)/winLimit;
+        double alphaStartAmount = Math.pow((1.0-winChance)/winChance, startAmount);
+        double alphaWinLimit = Math.pow((1.0-winChance)/winChance, winLimit);
         if(winChance == 0.5){
             expectedRuinRates = 1-(startAmount*1.0)/winLimit;
         } else{
@@ -40,7 +40,7 @@ public class Ruin {
             System.out.println("Day: " + days + ", Ruin! Total plays: " + timesOfPlay);
             losses++;
         }
-        startAmount = amounMoney;
+        startAmount = amountMoney;
 
     }
     double actualRuinRate = losses*1.0/totalSimulations;
